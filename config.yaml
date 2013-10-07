@@ -1,0 +1,29 @@
+id: PageListFolderSpread
+key: PageListFolderSpread
+name: PageListFolderSpread
+version: 1.00
+l10n_class: PageListFolderSpread::L10N
+description: <__trans phrase="The folder of a web page is developed and displayed. ">
+author_name: m_shige1979
+author_link: 'https://twitter.com/m_shige1979/'
+
+list_properties:
+  page:
+    folder:
+      auto: 1
+      label: folder
+      bulk_html: >
+        sub {
+          my $prop = shift;
+          my ($objs, $app, $opts) = @_;
+          my @out;
+          for my $obj (@$objs) {
+              my $name = "(root)";
+              if($obj->folder){
+                  $name = $obj->folder->publish_path;
+              }
+              push @out, $name;
+          }
+          return @out;
+        }
+
